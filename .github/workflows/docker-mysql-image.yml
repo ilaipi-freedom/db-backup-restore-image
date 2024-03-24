@@ -1,0 +1,15 @@
+name: Mysql Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths: # mysql 目录变化时触发
+      - 'mysql/**'
+
+jobs:
+  start:
+    uses: ./.github/workflows/build-image.yml
+    with:
+      DB_TYPE_TO_BUILD: mysql
+    secrets: inherit
