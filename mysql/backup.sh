@@ -82,10 +82,9 @@ fi
 # -maxdepth 1: 只查找顶级子目录
 # -type d: 只查找目录
 # -name "????-??-??": 匹配YYYY-MM-DD 格式的目录名
-# -delete: 删除找到的目录及其内容
-# 添加 -exec echo "Deleting {}" \; 在删除前打印要删除的目录，方便调试和查看
-echo "Deleting directories older than $((REMAIN_DAYS - 1)) full calendar days ago (keeping last $REMAIN_DAYS days)..."
-find "$base_backup_dir" -maxdepth 1 -type d -name "????-??-??" -daystart -mtime +$((REMAIN_DAYS - 1)) -exec echo "Deleting {}" \; -delete
+# 删除过早的备份目录 (基于日历天) - 使用 rm -r 确保删除
+echo "Deleting directories older than $((REMAIN_DAYS - 1)) full calendar days ago (keeping last $REMAIN_DAYS days) using rm -r..."
+find "$base_backup_dir" -maxdepth 1 -type d -name "????-??-??" -daystart -mtime +$((REMAIN_DAYS - 1)) -exec echo "About to delete directory: {}" \; -exec rm -r {} \;
 echo "Directory cleanup complete."
 
 echo "Backup and cleanup script finished."
