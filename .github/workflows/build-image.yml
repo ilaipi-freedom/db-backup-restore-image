@@ -24,7 +24,7 @@ jobs:
         with:
           env_content: ${{ secrets.ENV }}
 
-      - name: Extract Docker metadata
+      - name: Extract DockerHub metadata
         id: meta_hub
         uses: docker/metadata-action@v5.6.1
         with:
@@ -36,7 +36,7 @@ jobs:
             # 如果是 tag 提交，使用默认标签策略
             type=ref,event=tag
 
-      - name: Extract Docker metadata
+      - name: Extract HuaweiCloud metadata
         id: meta_huaweicloud
         uses: docker/metadata-action@v5.6.1
         with:
