@@ -34,7 +34,7 @@ mkdir -p "$backup_dir" || { echo "Error: Could not create directory $backup_dir"
 backup_file="$backup_dir/$(date +%H-%M-%S).sql.gz"
 
 echo "Starting MySQL dump to: $backup_file"
-# 备份MySQL数据库
+# 备份 MySQL 数据库
 # 使用双引号确保变量值中的特殊字符不会导致问题
 # 使用 pipefail 确保 mysqldump 出错时能捕获到
 set -o pipefail
